@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Coords } from './interface/coords';
+import { PostsService } from './services/posts.service';
 
 @Component({
   selector: 'app-root',
@@ -7,17 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient) {}
-
+  constructor(private postService: PostsService) {}
   title = 'weather-app';
 
   API_KEY = `	SQbZMAWU8gzWWL5CCmAMGQ81BgxAQM74`;
+  coords: Coords;
 
   ngOnInit(): void {
-    this.http
-      .get(
-        `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=%09SQbZMAWU8gzWWL5CCmAMGQ81BgxAQM74`
-      )
-      .subscribe((resData) => console.log(resData));
+    this.postService.getLocation().subscribe((resData) => {
+      this.coords = {
+        latitude: resData['latitude'],
+        longitude: resData['longitude'],
+      };
+      this.postService
+        .getWeatherByLocation(this.coords)
+        .subscribe((results) => console.log(results));
+    });
   }
 }
