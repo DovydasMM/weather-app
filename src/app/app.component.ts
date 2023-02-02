@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Coords } from './interface/coords';
+import { Weather } from './models/weather.model';
 import { PostsService } from './services/posts.service';
+import { WeatherInfoService } from './services/weather-info.service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +9,19 @@ import { PostsService } from './services/posts.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private postService: PostsService) {}
+  constructor(
+    private postService: PostsService,
+    private weatherService: WeatherInfoService
+  ) {}
   title = 'weather-app';
-
-  API_KEY = `	SQbZMAWU8gzWWL5CCmAMGQ81BgxAQM74`;
-  coords: Coords;
+  currentWeather: Weather;
+  dataLoaded = false;
 
   ngOnInit(): void {
-    this.postService.getLocation().subscribe((resData) => {
-      this.coords = {
-        latitude: resData['latitude'],
-        longitude: resData['longitude'],
-      };
-      this.postService
-        .getWeatherByLocation(this.coords)
-        .subscribe((results) => console.log(results));
+    this.weatherService.gotWeather.subscribe((resData) => {
+      this.currentWeather = resData;
+      this.dataLoaded = true;
     });
+    this.weatherService.importWeather();
   }
 }
