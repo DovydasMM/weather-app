@@ -35,7 +35,6 @@ export class WeatherInfoService {
           let currentTime = weatherData['current']['dt'];
           let daily = weatherData['daily'];
           let hourly = weatherData['hourly'];
-          console.log(weatherData);
           this.currentWeather = new Weather(
             cityName,
             tempFeel,

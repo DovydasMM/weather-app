@@ -1,1 +1,11 @@
-<p>weather-forecast works!</p>
+<button class="forecast-button" (click)="onDaily()">Daily</button>
+<button class="forecast-button" (click)="onHourly()">Hourly</button>
+<div class="forecast-container">
+  <div class="forecast-item" *ngFor="let forecast of forecastArray">
+    <p *ngIf="isDaily">{{ forecast.time | date : "EEEE" }}</p>
+    <p *ngIf="!isDaily">{{ forecast.time | date : "hh mm" }}</p>
+    <p>{{ forecast.dayTemp }} <sup>o</sup>C</p>
+    <p *ngIf="isDaily">{{ forecast.nightTemp }} <sup>o</sup>C</p>
+    <p>{{ forecast.weather }}</p>
+  </div>
+</div>
