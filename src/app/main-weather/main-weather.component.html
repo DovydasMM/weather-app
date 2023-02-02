@@ -38,3 +38,7 @@
     </div>
   </div>
 </div>
+<app-weather-forecast
+  *ngIf="gotWeather"
+  [weatherInfo]="currentWeather"
+></app-weather-forecast>
