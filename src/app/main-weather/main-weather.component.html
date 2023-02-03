@@ -1,44 +1,52 @@
 <div class="container" *ngIf="gotWeather">
-  <div class="weather-info">
-    <p class="weather-info-city">{{ currentWeather.cityName }}</p>
-    <p class="weather-info-date">
-      {{ currentWeather.currentTime | date : "EEEE, LLL dd yy" }}
-    </p>
-    <p class="weather-info-date">
-      {{ currentWeather.currentTime | date : "shortTime" }}
-    </p>
-    <p class="weather-info-temperature">
-      {{ currentWeather.currentTemp }} <sup>o</sup>C
-    </p>
-    <fa-icon class="weather-info-icon" [icon]="iconSnow"></fa-icon>
+  <div class="container-main">
+    <div class="weather-info">
+      <p class="weather-info-city">{{ currentWeather.cityName }}</p>
+      <p class="weather-info-date">
+        {{ currentWeather.currentTime | date : "EEEE, LLL dd yy" }}
+      </p>
+      <p class="weather-info-date">
+        {{ currentWeather.currentTime | date : "shortTime" }}
+      </p>
+      <p class="weather-info-temperature">
+        {{ currentWeather.currentTemp }} <sup>o</sup>C
+      </p>
+      <fa-icon class="weather-info-icon" [icon]="iconSnow"></fa-icon>
+    </div>
+    <div class="weather-details">
+      <div class="weather-details-container">
+        <fa-icon
+          class="weather-details-icon"
+          [icon]="iconThermometer"
+        ></fa-icon>
+        <div>
+          <p class="weather-detail-type">Feels like</p>
+          <p class="weather-detail-value">
+            {{ currentWeather.tempFeel }} <sup>o</sup>C
+          </p>
+        </div>
+      </div>
+      <div class="weather-details-container">
+        <fa-icon class="weather-details-icon" [icon]="iconHumid"></fa-icon>
+        <div>
+          <p class="weather-detail-type">Humidity</p>
+          <p class="weather-detail-value">{{ currentWeather.humidity }}%</p>
+        </div>
+      </div>
+      <div class="weather-details-container">
+        <fa-icon class="weather-details-icon" [icon]="iconWind"></fa-icon>
+        <div>
+          <p class="weather-detail-type">Wind</p>
+          <p class="weather-detail-value">
+            {{ currentWeather.windSpeed }} km/h
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="weather-details">
-    <div class="weather-details-container">
-      <fa-icon class="weather-details-icon" [icon]="iconThermometer"></fa-icon>
-      <div>
-        <p class="weather-detail-type">Feels like</p>
-        <p class="weather-detail-value">
-          {{ currentWeather.tempFeel }} <sup>o</sup>C
-        </p>
-      </div>
-    </div>
-    <div class="weather-details-container">
-      <fa-icon class="weather-details-icon" [icon]="iconHumid"></fa-icon>
-      <div>
-        <p class="weather-detail-type">Humidity</p>
-        <p class="weather-detail-value">{{ currentWeather.humidity }}%</p>
-      </div>
-    </div>
-    <div class="weather-details-container">
-      <fa-icon class="weather-details-icon" [icon]="iconWind"></fa-icon>
-      <div>
-        <p class="weather-detail-type">Wind</p>
-        <p class="weather-detail-value">{{ currentWeather.windSpeed }} km/h</p>
-      </div>
-    </div>
-  </div>
+
+  <app-weather-forecast
+    *ngIf="gotWeather"
+    [weatherInfo]="currentWeather"
+  ></app-weather-forecast>
 </div>
-<app-weather-forecast
-  *ngIf="gotWeather"
-  [weatherInfo]="currentWeather"
-></app-weather-forecast>
