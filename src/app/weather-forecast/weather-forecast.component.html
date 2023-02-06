@@ -1,11 +1,46 @@
-<button class="forecast-button" (click)="onDaily()">Daily</button>
-<button class="forecast-button" (click)="onHourly()">Hourly</button>
+<div class="forecast-options">
+  <button
+    class="forecast-button"
+    (click)="onDaily()"
+    [ngClass]="{ bla: isDaily == true }"
+  >
+    Daily
+  </button>
+  <button
+    class="forecast-button"
+    (click)="onHourly(0)"
+    [ngClass]="{ bla: isDaily == false }"
+  >
+    Hourly
+  </button>
+  <div class="forecast-dots" *ngIf="!isDaily">
+    <div
+      class="forecast-dot"
+      [ngClass]="{ active: activeListPart == 0 }"
+      (click)="onHourly(0)"
+    ></div>
+    <div
+      class="forecast-dot"
+      (click)="onHourly(1)"
+      [ngClass]="{ active: activeListPart == 1 }"
+    ></div>
+    <div
+      class="forecast-dot"
+      (click)="onHourly(2)"
+      [ngClass]="{ active: activeListPart == 2 }"
+    ></div>
+  </div>
+</div>
 <div class="forecast-container">
   <div class="forecast-item" *ngFor="let forecast of forecastArray">
-    <p *ngIf="isDaily">{{ forecast.time | date : "EEEE" }}</p>
-    <p *ngIf="!isDaily">{{ forecast.time | date : "hh mm" }}</p>
-    <p>{{ forecast.dayTemp }} <sup>o</sup>C</p>
+    <p class="forecast-time" *ngIf="isDaily">
+      {{ forecast.time | date : "EEEE" }}
+    </p>
+    <p class="forecast-time" *ngIf="!isDaily">
+      {{ forecast.time | date : "h a" }}
+    </p>
+    <p class="forecast-dayTemp">{{ forecast.dayTemp }} <sup>o</sup>C</p>
     <p *ngIf="isDaily">{{ forecast.nightTemp }} <sup>o</sup>C</p>
-    <p>{{ forecast.weather }}</p>
+    <fa-icon class="forecast-icon" [icon]="forecast.icon"></fa-icon>
   </div>
 </div>

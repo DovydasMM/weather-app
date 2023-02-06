@@ -3,6 +3,7 @@ export class Forecast {
     public dayTemp: number,
     public nightTemp: number,
     public time: number,
-    public weather: string
+    public weather: string,
+    public icon: any
   ) {}
 }

@@ -11,7 +11,10 @@
       <p class="weather-info-temperature">
         {{ currentWeather.currentTemp }} <sup>o</sup>C
       </p>
-      <fa-icon class="weather-info-icon" [icon]="iconSnow"></fa-icon>
+      <fa-icon
+        class="weather-info-icon"
+        [icon]="currentWeather.weatherIcon"
+      ></fa-icon>
     </div>
     <div class="weather-details">
       <div class="weather-details-container">

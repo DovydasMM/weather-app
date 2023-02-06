@@ -13,19 +13,23 @@ export class WeatherForecastComponent implements OnInit {
   @Input() weatherInfo;
 
   forecastArray: Forecast[] = [];
-  isDaily = true;
+  isDaily = false;
+  activeListPart = 0;
 
   onDaily() {
     this.isDaily = true;
+    this.activeListPart = 0;
     this.forecastArray = this.forecastService.getDailyForecast(
       this.weatherInfo
     );
   }
 
-  onHourly() {
+  onHourly(listPart: number) {
     this.isDaily = false;
+    this.activeListPart = listPart;
     this.forecastArray = this.forecastService.getHourlyForecast(
-      this.weatherInfo
+      this.weatherInfo,
+      listPart
     );
   }
 

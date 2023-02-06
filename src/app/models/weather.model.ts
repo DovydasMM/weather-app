@@ -7,6 +7,7 @@ export class Weather {
     public humidity: number,
     public windSpeed: number,
     public weather: any,
+    public weatherIcon: any,
     public currentTime: any,
     public daily: any,
     public hourly: any

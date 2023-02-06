@@ -3,12 +3,16 @@ import { Coords } from '../interface/coords';
 import { PostsService } from './posts.service';
 import { Weather } from '../models/weather.model';
 import { Subject } from 'rxjs';
+import { IconServicesService } from './icon-services.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherInfoService {
-  constructor(private postService: PostsService) {}
+  constructor(
+    private postService: PostsService,
+    private iconService: IconServicesService
+  ) {}
 
   gotWeather = new Subject<Weather>();
   coords: Coords;
@@ -32,6 +36,7 @@ export class WeatherInfoService {
             weatherData['current']['wind_speed'] * 3.6
           );
           let weather = weatherData['current']['weather'][0]['main'];
+          let weatherIcon = this.iconService.getIcon(weather);
           let currentTime = weatherData['current']['dt'];
           let daily = weatherData['daily'];
           let hourly = weatherData['hourly'];
@@ -43,6 +48,7 @@ export class WeatherInfoService {
             humidity,
             windSpeed,
             weather,
+            weatherIcon,
             currentTime * 1000,
             daily,
             hourly

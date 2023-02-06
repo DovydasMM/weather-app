@@ -16,6 +16,7 @@ import {
 })
 export class MainWeatherComponent implements OnInit {
   currentWeather: Weather;
+
   gotWeather = false;
   iconCloud = faCloud;
   iconSnow = faSnowflake;
@@ -24,8 +25,10 @@ export class MainWeatherComponent implements OnInit {
   iconWind = faWind;
 
   constructor(private weatherService: WeatherInfoService) {}
+
   ngOnInit(): void {
     this.weatherService.gotWeather.subscribe((weatherData) => {
+      console.log(weatherData);
       this.currentWeather = weatherData;
       this.gotWeather = true;
     });
