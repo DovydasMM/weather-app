@@ -13,7 +13,7 @@ export class WeatherForecastComponent implements OnInit {
   @Input() weatherInfo;
 
   forecastArray: Forecast[] = [];
-  isDaily = false;
+  isDaily = true;
   activeListPart = 0;
 
   onDaily() {

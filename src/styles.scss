@@ -6,8 +6,13 @@
 }
 
 body {
-  background: url(app/images/background.png);
-  min-height: 100vh;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url(app/images/background.png);
+  overflow: hidden;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -15,6 +20,7 @@ body {
   font-family: "Roboto";
   font-size: 16px;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  min-height: 100vh;
 }
 
 p {
@@ -25,8 +31,8 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 3rem;
-  min-height: 90vh;
+  margin: 3rem 3rem 1rem 3rem;
+  min-height: 85vh;
 }
 
 .container-main {
@@ -77,8 +83,7 @@ p {
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
-
-  min-height: 10rem;
+  min-height: 12rem;
 }
 
 .forecast-options {
@@ -138,4 +143,51 @@ p {
 
 .forecast-icon {
   font-size: 2rem;
+}
+
+footer {
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #636363;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+
+  .forecast-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 20rem;
+  }
+
+  .forecast-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .forecast-item > * {
+    width: 10rem;
+    margin-bottom: 0.2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 16px;
+  }
 }
