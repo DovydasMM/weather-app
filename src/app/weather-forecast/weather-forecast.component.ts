@@ -1,5 +1,5 @@
 import { Forecast } from './../models/forecast.model.';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Input } from '@angular/core';
 import { ForecastService } from '../services/forecast.service';
 
@@ -11,7 +11,6 @@ import { ForecastService } from '../services/forecast.service';
 export class WeatherForecastComponent implements OnInit {
   constructor(private forecastService: ForecastService) {}
   @Input() weatherInfo;
-
   forecastArray: Forecast[] = [];
   isDaily = true;
   activeListPart = 0;

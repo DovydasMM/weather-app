@@ -46,6 +46,19 @@
         </div>
       </div>
     </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <div>
+        <label for="cityName">City name:</label>
+        <input
+          type="text"
+          id="cityName"
+          ngModel
+          name="cityName"
+          #cityName="ngModel"
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 
   <app-weather-forecast

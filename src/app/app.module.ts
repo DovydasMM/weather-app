@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { MainWeatherComponent } from './main-weather/main-weather.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, MainWeatherComponent, WeatherForecastComponent],
-  imports: [BrowserModule, HttpClientModule, FontAwesomeModule],
+  imports: [BrowserModule, HttpClientModule, FontAwesomeModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

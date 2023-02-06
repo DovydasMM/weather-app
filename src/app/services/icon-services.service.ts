@@ -9,7 +9,6 @@ export class IconServicesService {
   constructor() {}
 
   getIcon(weatherType: string) {
-    console.log(weatherType);
     switch (weatherType) {
       case 'Clouds':
         return faCloud;

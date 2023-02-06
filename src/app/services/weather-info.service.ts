@@ -61,4 +61,10 @@ export class WeatherInfoService {
   getWeather() {
     return this.currentWeather;
   }
+
+  getWeatherByCity(cityName: string) {
+    this.postService.getCityCoords(cityName).subscribe((resData) => {
+      console.log(resData);
+    });
+  }
 }
