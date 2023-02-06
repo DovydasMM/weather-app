@@ -7,6 +7,7 @@ import {
   faTemperatureHalf,
   faHouseFloodWater,
   faWind,
+  faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
 import { PostsService } from '../services/posts.service';
@@ -27,6 +28,7 @@ export class MainWeatherComponent implements OnInit {
   iconThermometer = faTemperatureHalf;
   iconHumid = faHouseFloodWater;
   iconWind = faWind;
+  iconGlass = faMagnifyingGlass;
 
   constructor(
     private weatherService: WeatherInfoService,

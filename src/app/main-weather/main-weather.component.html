@@ -46,10 +46,13 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="weather-searchBox">
     <form (ngSubmit)="onSubmit()" #f="ngForm">
       <div>
-        <label for="cityName">City name:</label>
         <input
+          class="form-input"
+          placeholder="Search for a city..."
           type="text"
           id="cityName"
           ngModel
@@ -57,7 +60,9 @@
           #cityName="ngModel"
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">
+        <fa-icon class="searchBox-icon" [icon]="iconGlass"></fa-icon>
+      </button>
     </form>
   </div>
 

@@ -79,6 +79,42 @@ p {
   gap: 3rem;
 }
 
+.weather-searchBox {
+  display: flex;
+}
+
+form {
+  display: flex;
+  border-bottom: 1px solid white;
+}
+
+.weather-searchBox button {
+  background: transparent;
+  border: none;
+}
+
+.form-input {
+  background: transparent;
+  border: none;
+  color: white;
+  max-width: 7rem;
+}
+
+.searchBox-icon {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.form-input::placeholder {
+  opacity: 1;
+  color: white;
+  font-weight: 500;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
 .forecast-container {
   margin-top: 1rem;
   display: flex;

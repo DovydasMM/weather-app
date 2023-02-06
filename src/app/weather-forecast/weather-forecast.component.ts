@@ -1,3 +1,4 @@
+import { WeatherInfoService } from './../services/weather-info.service';
 import { Forecast } from './../models/forecast.model.';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Input } from '@angular/core';
@@ -9,15 +10,17 @@ import { ForecastService } from '../services/forecast.service';
   styleUrls: ['./weather-forecast.component.scss'],
 })
 export class WeatherForecastComponent implements OnInit {
-  constructor(private forecastService: ForecastService) {}
+  constructor(
+    private forecastService: ForecastService,
+    private weatherInfoService: WeatherInfoService
+  ) {}
   @Input() weatherInfo;
   forecastArray: Forecast[] = [];
   isDaily = true;
   activeListPart = 0;
 
   onDaily() {
-    this.isDaily = true;
-    this.activeListPart = 0;
+    this.resetForecast();
     this.forecastArray = this.forecastService.getDailyForecast(
       this.weatherInfo
     );
@@ -36,5 +39,14 @@ export class WeatherForecastComponent implements OnInit {
     this.forecastArray = this.forecastService.getDailyForecast(
       this.weatherInfo
     );
+    this.weatherInfoService.gotWeather.subscribe((newCity) => {
+      this.resetForecast();
+      this.forecastArray = this.forecastService.getDailyForecast(newCity);
+    });
+  }
+
+  resetForecast() {
+    this.isDaily = true;
+    this.activeListPart = 0;
   }
 }
