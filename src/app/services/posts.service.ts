@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Coords } from '../interface/coords';
 import { Weather } from '../models/weather.model';
-import { map, throwError } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +16,15 @@ export class PostsService {
   private API_KEY = `20f7632ffc2c022654e4093c6947b4f4`;
 
   getLocation() {
-    return this.http.get(
-      `https://ipgeolocation.abstractapi.com/v1/?api_key=5b305c2c0ff841adb70033db1fd316d1`
-    );
+    return this.http
+      .get(
+        `https://ipgeolocation.abstractapi.com/v1/?api_key=5b305c2c0ff841adb70033db1fd316d1`
+      )
+      .pipe(
+        catchError((err) => {
+          return throwError(err);
+        })
+      );
   }
 
   getWeatherByLocation(coordinates: Coords, cityName) {
