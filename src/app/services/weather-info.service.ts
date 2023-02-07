@@ -15,6 +15,7 @@ export class WeatherInfoService {
   ) {}
 
   gotWeather = new Subject<Weather>();
+  error = new Subject<string>();
   coords: Coords;
   currentWeather: Weather;
 
@@ -27,7 +28,6 @@ export class WeatherInfoService {
       this.postService
         .getWeatherByLocation(this.coords, locationData['city'])
         .subscribe((weatherData) => {
-          console.log(weatherData);
           this.gotWeather.next(weatherData);
         });
     });
@@ -38,10 +38,16 @@ export class WeatherInfoService {
   }
 
   getWeatherByCity(cityName: string) {
-    this.postService.getCityCoords(cityName).subscribe((cityCoords) => {
-      this.postService
-        .getWeatherByLocation(cityCoords, cityName)
-        .subscribe((weatherData) => this.gotWeather.next(weatherData));
-    });
+    this.postService.getCityCoords(cityName).subscribe(
+      (cityCoords) => {
+        console.log(cityCoords);
+        this.postService
+          .getWeatherByLocation(cityCoords.coordinates, cityCoords.city)
+          .subscribe((weatherData) => this.gotWeather.next(weatherData));
+      },
+      (error) => {
+        this.error.next(error.message);
+      }
+    );
   }
 }

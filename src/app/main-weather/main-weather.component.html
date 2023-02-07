@@ -58,16 +58,23 @@
           ngModel
           name="cityName"
           #cityName="ngModel"
+          required
         />
       </div>
       <button type="submit">
         <fa-icon class="searchBox-icon" [icon]="iconGlass"></fa-icon>
       </button>
     </form>
+    <div class="searchBox-errorMessage">
+      <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    </div>
   </div>
-
   <app-weather-forecast
     *ngIf="gotWeather"
     [weatherInfo]="currentWeather"
   ></app-weather-forecast>
 </div>
+<footer class="footer" *ngIf="gotWeather">
+  © 2023 <a href="https://github.com/DovydasMM">DovydasMM</a>. All rights
+  reserved.
+</footer>

@@ -29,6 +29,7 @@ export class MainWeatherComponent implements OnInit {
   iconHumid = faHouseFloodWater;
   iconWind = faWind;
   iconGlass = faMagnifyingGlass;
+  errorMessage: string;
 
   constructor(
     private weatherService: WeatherInfoService,
@@ -39,6 +40,11 @@ export class MainWeatherComponent implements OnInit {
     this.weatherService.gotWeather.subscribe((weatherData) => {
       this.currentWeather = weatherData;
       this.gotWeather = true;
+      this.errorMessage = '';
+    });
+    this.weatherService.error.subscribe((resData) => {
+      console.log(resData);
+      this.errorMessage = resData;
     });
   }
 

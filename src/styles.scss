@@ -81,6 +81,8 @@ p {
 
 .weather-searchBox {
   display: flex;
+  flex-direction: column;
+  max-width: 10rem;
 }
 
 form {
@@ -91,6 +93,12 @@ form {
 .weather-searchBox button {
   background: transparent;
   border: none;
+}
+
+.searchBox-errorMessage {
+  font-weight: bold;
+
+  min-height: 1rem;
 }
 
 .form-input {
@@ -202,6 +210,10 @@ footer a:hover {
 @media screen and (max-width: 600px) {
   html {
     font-size: 12px;
+  }
+
+  .weather-searchBox {
+    flex-direction: row;
   }
 
   .forecast-container {

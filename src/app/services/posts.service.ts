@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Coords } from '../interface/coords';
 import { Weather } from '../models/weather.model';
-import { map } from 'rxjs';
+import { map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -65,11 +65,23 @@ export class PostsService {
       )
       .pipe(
         map((resData) => {
+          if (resData['results'].length == 0) {
+            throw Error('Location was not found');
+          }
+
+          //Getting correct city name. If city would not be found, instead it will show a region, or a country
+          let cityByCoords: string;
+          if (resData['results'][0]['components']['city']) {
+            cityByCoords = resData['results'][0]['components']['city'];
+          }
+          //If city was not found, assigning a region or a country
+          else cityByCoords = resData['results'][0]['formatted'];
+
           let coordinates: Coords = {
             latitude: resData['results'][0]['geometry']['lat'],
             longitude: resData['results'][0]['geometry']['lng'],
           };
-          return coordinates;
+          return { coordinates: coordinates, city: cityByCoords };
         })
       );
   }
