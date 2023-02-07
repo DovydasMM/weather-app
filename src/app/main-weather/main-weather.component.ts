@@ -43,13 +43,16 @@ export class MainWeatherComponent implements OnInit {
       this.errorMessage = '';
     });
     this.weatherService.error.subscribe((resData) => {
-      console.log(resData);
       this.errorMessage = resData;
     });
   }
 
   onSubmit() {
     let city = this.signupForm.value.cityName;
+    if (city == '' || city == null) {
+      this.weatherService.importWeather();
+      return;
+    }
     this.weatherService.getWeatherByCity(city);
     this.signupForm.reset();
   }

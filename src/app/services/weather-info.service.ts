@@ -20,17 +20,22 @@ export class WeatherInfoService {
   currentWeather: Weather;
 
   importWeather() {
-    this.postService.getLocation().subscribe((locationData) => {
-      this.coords = {
-        latitude: locationData['latitude'],
-        longitude: locationData['longitude'],
-      };
-      this.postService
-        .getWeatherByLocation(this.coords, locationData['city'])
-        .subscribe((weatherData) => {
-          this.gotWeather.next(weatherData);
-        });
-    });
+    this.postService.getLocation().subscribe(
+      (locationData) => {
+        this.coords = {
+          latitude: locationData['latitude'],
+          longitude: locationData['longitude'],
+        };
+        this.postService
+          .getWeatherByLocation(this.coords, locationData['city'])
+          .subscribe((weatherData) => {
+            this.gotWeather.next(weatherData);
+          });
+      },
+      (error) => {
+        if (error['status'] == 429) this.error.next('Too many requests');
+      }
+    );
   }
 
   getWeather() {
@@ -40,7 +45,6 @@ export class WeatherInfoService {
   getWeatherByCity(cityName: string) {
     this.postService.getCityCoords(cityName).subscribe(
       (cityCoords) => {
-        console.log(cityCoords);
         this.postService
           .getWeatherByLocation(cityCoords.coordinates, cityCoords.city)
           .subscribe((weatherData) => this.gotWeather.next(weatherData));
